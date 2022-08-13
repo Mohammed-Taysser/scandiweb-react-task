@@ -33,8 +33,20 @@ body {
 }
 
 .page-not-found {
-	height: 100vh;
-	background-color: #f5f7fb;
+	height: calc(100vh - 65px);
+	text-align: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	img {
+		max-width: 100%;
+		height: auto;
+	}
+	.title,
+	.subtitle {
+		font-weight: 400;
+	}
 }
 
 .cart-info {
