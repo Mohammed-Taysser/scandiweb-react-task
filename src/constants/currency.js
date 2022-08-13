@@ -1,22 +1,47 @@
-import dollar from '../assets/images/icons/currency/dollar.svg';
-import euro from '../assets/images/icons/currency/euro.svg';
-import yen from '../assets/images/icons/currency/yen.svg';
-
 const CURRENCY = [
 	{
-		id: 'dollar',
 		label: 'USD',
-		icon: dollar,
+		symbol: '$',
 	},
 	{
-		id: 'euro',
-		label: 'EUR',
-		icon: euro,
+		label: 'AUD',
+		symbol: 'A$',
 	},
 	{
-		id: 'yen',
+		label: 'GBP',
+		symbol: '£',
+	},
+	{
 		label: 'JPY',
-		icon: yen,
+		symbol: '¥',
+	},
+	{
+		label: 'RUB',
+		symbol: '₽',
 	},
 ];
-export default CURRENCY;
+
+const TAX = [
+	{
+		label: 'USD',
+		amount: 300.23,
+	},
+	{
+		label: 'GBP',
+		amount: 215.8,
+	},
+	{
+		label: 'AUD',
+		amount: 387.3,
+	},
+	{
+		label: 'JPY',
+		amount: 32422.38,
+	},
+	{
+		label: 'RUB',
+		amount: 22704.14,
+	},
+];
+
+export { TAX, CURRENCY };
