@@ -1,0 +1,8 @@
+@use 'sass:color';
+
+// colors
+$main-color: #5ece7b;
+$dark-main-color: color.adjust($main-color, $lightness: -18%);
+
+// fonts
+$main-font: 'Raleway', sans-serif;
