@@ -1,0 +1,103 @@
+.container {
+	width: 100%;
+	padding-right: 0.75rem;
+	padding-left: 0.75rem;
+	margin-right: auto;
+	margin-left: auto;
+
+	@media (min-width: 576px) {
+		max-width: 540px;
+	}
+
+	@media (min-width: 768px) {
+		max-width: 720px;
+	}
+
+	@media (min-width: 992px) {
+		max-width: 960px;
+	}
+
+	@media (min-width: 1200px) {
+		max-width: 1140px;
+	}
+
+	@media (min-width: 1400px) {
+		max-width: 1320px;
+	}
+}
+
+.cursor-pointer {
+	cursor: pointer;
+}
+
+::selection {
+	background-color: $main-color;
+	color: #fff;
+}
+
+hr.special-hr {
+	height: 0;
+	opacity: 1;
+	border-top: 1px solid #eff2f7;
+}
+
+.user-select-none {
+	user-select: none;
+}
+
+.display-5 {
+	font-size: calc(1.425rem + 2.1vw);
+	font-weight: 300;
+	line-height: 1.2;
+}
+
+.nice-shadow {
+	box-shadow: 0 3px 15px rgba(22, 41, 124, 0.1);
+}
+
+.text-aurora {
+	color: $main-color;
+}
+
+.bg-aurora-soft {
+	background-color: rgba($main-color, $alpha: 0.25);
+}
+
+.border-aurora {
+	border: 1px solid $main-color;
+}
+
+.bg-aurora {
+	background-color: $main-color;
+}
+
+.btn-aurora {
+	display: inline-block;
+	font-weight: 400;
+	line-height: 1.5;
+	text-align: center;
+	text-decoration: none;
+	vertical-align: middle;
+	cursor: pointer;
+	user-select: none;
+	border: 1px solid transparent;
+	font-size: 1rem;
+	transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+		border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+	background-color: $main-color;
+	color: #fff;
+	border-color: $main-color;
+	padding: 16px 32px;
+
+	&:hover {
+		color: #fff;
+		background-color: rgba($color: $main-color, $alpha: 0.9);
+		border-color: rgba($color: $main-color, $alpha: 0.9);
+	}
+
+	&:focus {
+		background-color: rgba($color: $main-color, $alpha: 0.8);
+		border-color: rgba($color: $main-color, $alpha: 0.8);
+		color: #fff;
+	}
+}
