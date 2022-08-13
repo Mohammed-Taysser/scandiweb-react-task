@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import cartIcon from '../assets/images/icons/cart-white.svg';
 import PRODUCT from '../constants/cart';
-import useProductPrice from '../hooks/useProductPrice';
+import getProductPrice from '../utils/productPrice';
 
 class Category extends Component {
 	onAddToCartClick = (product) => {
@@ -37,7 +37,7 @@ class Category extends Component {
 								{product.name} {product.brand}
 							</Link>
 							<div className='product-price'>
-								$ {useProductPrice(product.prices)}
+								$ {getProductPrice(product.prices)}
 							</div>
 						</div>
 					</div>
