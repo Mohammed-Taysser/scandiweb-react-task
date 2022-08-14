@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import favicon from '../assets/images/icons/favicon.png';
 import CurrencySwitcher from '../components/CurrencySwitcher';
 import MiniCart from '../components/MiniCart';
@@ -11,19 +11,19 @@ class Navbar extends Component {
 				<div className='container'>
 					<ul className='navbar-menu'>
 						<li>
-							<Link to='/' className='navbar-link active'>
-								WOMEN
-							</Link>
+							<NavLink to='/' className='navbar-link'>
+								All
+							</NavLink>
 						</li>
 						<li>
-							<Link to='/' className='navbar-link'>
-								MEN
-							</Link>
+							<NavLink to='/category/clothes' className='navbar-link'>
+								clothes
+							</NavLink>
 						</li>
 						<li>
-							<Link to='/' className='navbar-link'>
-								kids
-							</Link>
+							<NavLink to='/category/tech' className='navbar-link'>
+								tech
+							</NavLink>
 						</li>
 					</ul>
 					<div className='navbar-brand'>
