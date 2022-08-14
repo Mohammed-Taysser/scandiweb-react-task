@@ -1,0 +1,25 @@
+<svg height="144" viewBox="-10 -10 144 144" width="144" xmlns="http://www.w3.org/2000/svg" aria-controls="aria-feedback"
+	data-v-86952c76="">
+	<linearGradient id="spinner_svg__a" x1="100%" x2="0%" y1="65.819%" y2="34.181%">
+		<stop offset="0" stop-color="#fff"></stop>
+		<stop offset=".076" stop-color="#5ece7b"></stop>
+		<stop offset="1" stop-color="rgba(94, 206, 123,0.521)" stop-opacity="0"></stop>
+	</linearGradient>
+	<filter id="spinner_svg__b" height="164.4%" width="136.2%" x="-18.1%" y="-32.2%">
+		<feGaussianBlur in="SourceGraphic" stdDeviation="4"></feGaussianBlur>
+	</filter>
+	<g fill="none" fill-rule="evenodd" stroke-linejoin="round" stroke-width="4">
+		<circle cx="62" cy="62" r="60" stroke="#78ceff" stroke-opacity=".161"></circle>
+		<g stroke="url(#spinner_svg__a)" stroke-linecap="round">
+			<path d="M119.706 45.51C112.542 20.392 89.419 2 62 2a59.915 59.915 0 00-19.649 3.291"
+				filter="url(#spinner_svg__b)">
+				<animateTransform attributeName="transform" attributeType="XML" type="rotate" dur="1.5s" from="0 62 62"
+					to="360 62 62" repeatCount="indefinite"></animateTransform>
+			</path>
+			<path d="M119.706 45.51C112.542 20.392 89.419 2 62 2a59.915 59.915 0 00-19.649 3.291">
+				<animateTransform attributeName="transform" attributeType="XML" type="rotate" dur="1.5s" from="0 62 62"
+					to="360 62 62" repeatCount="indefinite"></animateTransform>
+			</path>
+		</g>
+	</g>
+</svg>
