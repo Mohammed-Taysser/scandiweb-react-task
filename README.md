@@ -13,7 +13,7 @@ The Solution Should Be Implemented As Per Design, Which Is Available At This [li
 ### Download The Files Or Clone It With Git Version Control
 
 ```shell
-git clone https://github.com/Mohammed-Taysser/paperCuts.git
+git clone https://github.com/Mohammed-Taysser/scandiweb-react-task.git
 ```
 
 ### Inside Project Directory Install Dependencies By
