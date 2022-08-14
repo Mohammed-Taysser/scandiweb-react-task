@@ -1,18 +1,27 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { BrowserRouter } from 'react-router-dom';
 import App from './App';
 import reportWebVitals from './__tests__/reportWebVitals';
+import { BrowserRouter } from 'react-router-dom';
 import { store } from './redux/store';
 import { Provider } from 'react-redux';
+import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
+
+const client = new ApolloClient({
+	uri: process.env.REACT_APP_API_BASE_URL,
+	cache: new InMemoryCache(),
+});
+
 root.render(
 	<React.StrictMode>
 		<Provider store={store}>
-			<BrowserRouter>
-				<App />
-			</BrowserRouter>
+			<ApolloProvider client={client}>
+				<BrowserRouter>
+					<App />
+				</BrowserRouter>
+			</ApolloProvider>
 		</Provider>
 	</React.StrictMode>
 );
