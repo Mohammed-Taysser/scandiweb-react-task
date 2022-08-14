@@ -19,6 +19,7 @@ function MainRoutes() {
 		<Routes>
 			<Route path='*' element={<PageNotFound />} />
 			<Route path='/' element={<Category />} />
+			<Route path='/category/:title' element={<Category />} />
 			<Route path='/cart' element={<Cart />} />
 			<Route path='/product/:id' element={<ProductDetails />} />
 		</Routes>
