@@ -1,0 +1,9 @@
+.alert {
+	position: relative;
+	padding: 1rem 1rem;
+	margin-bottom: 1rem;
+	border-radius: 4px;
+	background: #ffffff;
+	border-left: 0.25rem solid $main-color;
+	box-shadow: 0 3px 15px rgba(22, 41, 124, 0.1);
+}
