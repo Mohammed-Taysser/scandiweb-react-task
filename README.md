@@ -38,7 +38,7 @@ yarn start
 
 ## Pages 📃
 
-- 404
+- 404 - page not found
 - PLP - product listing page, a.k.a. category page
 - PDP - product description page, a.k.a. product page
 - Cart & Cart overlay (Mini Cart)
