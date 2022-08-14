@@ -1,4 +1,4 @@
-# Getting Started Scandiweb Task 🌠
+# [Getting Started Scandiweb Task][live-demo] 🌠
 
 ## Overview 👀
 
@@ -7,6 +7,8 @@ This task will put you face-to-face to some common tasks in the world of React d
 You Are Expected To Fetch Data From The Graphql Endpoint And To Provide An Interface To View And Interact With This Data. You Can Find The Endpoint [here](https://github.com/scandiweb/junior-react-endpoint), Along With Instructions On How To Launch It.
 
 The Solution Should Be Implemented As Per Design, Which Is Available At This [link](https://www.figma.com/file/MSyCAqVy1UgNap0pvqH6H3/Junior-Frontend-Test-Designs-(Public)?node-id=150%3A1168).
+
+For Live Demo: [![vercel](https://img.shields.io/badge/-vercel-05122A?style=plastic&logo=vercel)][live-demo]
 
 ## Quick Start 🚀
 
@@ -71,3 +73,5 @@ yarn start
 - [`React Developer test - FAQ/frequently asked questions`](https://www.notion.so/00e72f0844a344dda28e19855d2fc34a?v=6f8d862cadc142cd9cb459fe721699ba)
 - [`Entry React developer TEST`](https://www.notion.so/Entry-React-developer-TEST-39f601f8aa3f48ac88c4a8fefda304c1)
 - [`Junior-Frontend-Test-Designs`](https://www.figma.com/file/MSyCAqVy1UgNap0pvqH6H3/Junior-Frontend-Test-Designs-(Public)?node-id=150%3A1168)
+
+[live-demo]: https://scandiweb-task-react.vercel.app/
