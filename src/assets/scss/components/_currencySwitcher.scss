@@ -7,6 +7,10 @@
 		.currency-dropdown-icon {
 			display: flex;
 			align-items: center;
+
+			.symbol {
+				margin: 0 5px;
+			}
 		}
 	}
 
@@ -33,7 +37,6 @@
 			transition: 0.4s;
 			color: #1d1f22;
 			display: flex;
-			justify-content: center;
 			align-items: center;
 
 			&:hover,
