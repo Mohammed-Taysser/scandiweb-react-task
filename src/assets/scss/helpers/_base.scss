@@ -18,9 +18,12 @@ body {
 	&.opened-mini-cart {
 		position: relative;
 		z-index: 1;
+		height: 100vh;
+		width: 100vw;
+		overflow: hidden;
 
 		&:before {
-			position: absolute;
+			position: fixed;
 			content: '';
 			display: block;
 			width: 100%;
