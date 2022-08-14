@@ -1,70 +1,73 @@
-# Getting Started with Create React App
+# Getting Started Scandiweb Task 🌠
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Overview 👀
 
-## Available Scripts
+This task will put you face-to-face to some common tasks in the world of React development and possibly will get you acknowledged with a bit of new technologies.
 
-In the project directory, you can run:
+You Are Expected To Fetch Data From The Graphql Endpoint And To Provide An Interface To View And Interact With This Data. You Can Find The Endpoint [here](https://github.com/scandiweb/junior-react-endpoint), Along With Instructions On How To Launch It.
 
-### `yarn start`
+The Solution Should Be Implemented As Per Design, Which Is Available At This [link](https://www.figma.com/file/MSyCAqVy1UgNap0pvqH6H3/Junior-Frontend-Test-Designs-(Public)?node-id=150%3A1168).
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Quick Start 🚀
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Download The Files Or Clone It With Git Version Control
 
-### `yarn test`
+```shell
+git clone https://github.com/Mohammed-Taysser/paperCuts.git
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Inside Project Directory Install Dependencies By
 
-### `yarn build`
+```shell
+npm install
+# OR
+yarn
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Runs The App In The Development Mode
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Open [`http://localhost:3000`](http://localhost:3000) to view it in your browser.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```shell
+npm start
+# OR
+yarn start
+```
 
-### `yarn eject`
+## Pages 📃
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- 404
+- PLP - product listing page, a.k.a. category page
+- PDP - product description page, a.k.a. product page
+- Cart & Cart overlay (Mini Cart)
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Features 💬
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- No UI libraries (e.g. Tailwind, Material UI, Ant Design).
+- Build Using Class Base Component.
+- Create-react-app To Scaffold The Application.
+- Using localStorage To Save Data.
+- Use Redux Store.
+- JavaScript code linting is done using `ESLint` & `JSconfig`.
+- Has `.editorconfig` which helps developers define and maintain consistent coding styles between different editors and IDEs.
+- Use `.Env` To Store Fixed Variable Like Graphql Endpoint.
+- Empower With Sass Preprocessor.
+- Use Graphql As Api End Point.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## Used Tools 🧰
 
-## Learn More
+- [`Create React App`](https://github.com/facebook/create-react-app)
+- [`React.js`](https://reactjs.org/)
+- [`React-Router-Dom`](https://reactrouter.com/docs/en/v6/getting-started/tutorial)
+- [`React-Redux`](https://react-redux.js.org/)
+- [`Redux-Toolkit`](https://redux-toolkit.js.org/)
+- [`Sass`](https://sass-lang.com/)
+- [`Apollo Graphql`](https://www.apollographql.com/docs/)
+- [`Graphql`](https://graphql.org/)
+- [`Html-React-Parser`](https://www.npmjs.com/package/html-react-parser)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Resources 📚
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- [`React Developer test - FAQ/frequently asked questions`](https://www.notion.so/00e72f0844a344dda28e19855d2fc34a?v=6f8d862cadc142cd9cb459fe721699ba)
+- [`Entry React developer TEST`](https://www.notion.so/Entry-React-developer-TEST-39f601f8aa3f48ac88c4a8fefda304c1)
+- [`Junior-Frontend-Test-Designs`](https://www.figma.com/file/MSyCAqVy1UgNap0pvqH6H3/Junior-Frontend-Test-Designs-(Public)?node-id=150%3A1168)
