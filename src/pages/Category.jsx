@@ -5,6 +5,8 @@ import { exchangePrice } from '../utils/exchange';
 import cartIcon from '../assets/images/icons/cart-white.svg';
 import { categoryProductHOC } from '../HOC/apollo';
 import withParamsHOC from '../HOC/withParams';
+import Spinner from '../components/Spinner';
+import Alert from '../components/Alert';
 
 class Category extends Component {
 	onAddToCartClick = (product) => {
@@ -15,9 +17,9 @@ class Category extends Component {
 		const { loading, error, data } = this.props.query;
 
 		if (loading) {
-			return <>loading</>;
+			return <Spinner />;
 		} else if (error) {
-			return <>error</>;
+			return <Alert>{error.message}</Alert>;
 		} else if (data?.category) {
 			const { products } = data.category;
 			return (
@@ -56,7 +58,7 @@ class Category extends Component {
 				</>
 			);
 		} else {
-			return <>no product found</>;
+			return <Alert>no category found</Alert>;
 		}
 	};
 
