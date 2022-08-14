@@ -28,9 +28,46 @@
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@100;200;300;400;500;800&display=swap"
 			rel="stylesheet">
+
+		<style>
+			body.load .loading-container,
+			body.load .loading-overlay {
+				display: block;
+			}
+
+			.loading-overlay {
+				position: fixed;
+				background: #f8f9fa;
+				width: 100%;
+				height: 100%;
+				z-index: 90;
+				display: none;
+			}
+
+			.loading-container {
+				position: fixed;
+				top: 50%;
+				z-index: 100;
+				text-align: center;
+				left: 50%;
+				-webkit-transform: translate(-50%, -50%);
+				-ms-transform: translate(-50%, -50%);
+				transform: translate(-50%, -50%);
+				display: none;
+				width: 200px;
+				height: 200px;
+			}
+
+		</style>
 	</head>
 
-	<body>
+	<body class='load'>
+
+		<div class="loading-overlay"></div>
+		<div class="loading-container" id="js-loading-container">
+			<img src='%PUBLIC_URL%/loader.svg' alt='loading animation' />
+		</div>
+
 		<noscript>You need to enable JavaScript to run this app.</noscript>
 		<div id="root"></div>
 	</body>
