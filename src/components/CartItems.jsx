@@ -28,12 +28,12 @@ class CartItems extends Component {
 	render() {
 		return (
 			<div className='cart-items-wrapper'>
-				{this.props.cart.map((item) => (
+				{this.props.cart.map((item, index) => (
 					<div
 						className={`single-cart-item ${
 							this.props.withBorder ? 'with-border' : ''
 						}`}
-						key={item.id}
+						key={index}
 					>
 						<div className='item-info'>
 							<h3 className='item-title'>{item.name}</h3>
