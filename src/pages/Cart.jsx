@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { exchangeTax } from '../utils/exchange';
+import { cartItemsLength, cartTotalFees } from '../utils/cart';
 import CartItems from '../components/CartItems';
 
 class Cart extends Component {
@@ -10,13 +13,20 @@ class Cart extends Component {
 					<CartItems withBorder withSlider />
 					<div className='cart-info'>
 						<div className='cart-title'>
-							tax 20%: <strong>$ 42.00</strong>
+							tax 20%:
+							<strong>
+								{this.props.currency.symbol} {exchangeTax(this.props.currency)}
+							</strong>
 						</div>
 						<div className='cart-title'>
-							quantity: <strong>10</strong>
+							quantity: <strong>{cartItemsLength(this.props.cart)}</strong>
 						</div>
 						<div className='cart-title'>
-							total: <strong>$ 402.00</strong>
+							total:{' '}
+							<strong>
+								{this.props.currency.symbol}{' '}
+								{cartTotalFees(this.props.cart, this.props.currency)}
+							</strong>
 						</div>
 						<button className='btn-aurora btn-order'>ORDER</button>
 					</div>
@@ -26,4 +36,8 @@ class Cart extends Component {
 	}
 }
 
-export default Cart;
+function mapStateToProps(state) {
+	return { currency: state.currency.value, cart: state.cart.items };
+}
+
+export default connect(mapStateToProps)(Cart);

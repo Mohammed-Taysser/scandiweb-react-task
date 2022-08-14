@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-import CURRENCY from '../constants/currency';
-import arrowBottom from '../assets/images/icons/arrow/arrow-bottom.svg';
+import { connect } from 'react-redux';
+import { changeCurrency } from '../redux/features/currency.slice';
+import { CURRENCY } from '../constants/currency';
 import arrowTop from '../assets/images/icons/arrow/arrow-top.svg';
+import arrowBottom from '../assets/images/icons/arrow/arrow-bottom.svg';
 
 class CurrencySwitcher extends Component {
 	state = {
@@ -39,7 +41,7 @@ class CurrencySwitcher extends Component {
 	};
 
 	onCurrencyChange = (currency) => {
-		this.setState({ selectedCurrency: currency });
+		this.props.changeCurrency(currency);
 		this.setState({
 			isOpen: false,
 		});
@@ -48,10 +50,7 @@ class CurrencySwitcher extends Component {
 	CurrencyToggle = () => {
 		return (
 			<span className='currency-dropdown-icon'>
-				<img
-					src={this.state.selectedCurrency.icon}
-					alt={this.state.selectedCurrency.label}
-				/>
+				<span className='symbol'>{this.props.currency.symbol}</span>
 				{this.state.isOpen ? (
 					<img src={arrowTop} alt='arrow-top' />
 				) : (
@@ -67,13 +66,13 @@ class CurrencySwitcher extends Component {
 				{CURRENCY.map((currency) => (
 					<li
 						ref={(ref) => (this.displayAreaRef = ref)}
-						key={currency.id}
+						key={currency.label}
 						className={`currency-dropdown-item ${
-							this.state.selectedCurrency.id === currency.id ? 'selected' : ''
+							this.props.currency.label === currency.label ? 'selected' : ''
 						}`}
 						onClick={() => this.onCurrencyChange(currency)}
 					>
-						<img src={currency.icon} alt={currency.label} className='icon' />{' '}
+						{currency.symbol}
 						<span className='label'>{currency.label}</span>
 					</li>
 				))}
@@ -103,4 +102,14 @@ class CurrencySwitcher extends Component {
 	}
 }
 
-export default CurrencySwitcher;
+function mapStateToProps(state) {
+	return { currency: state.currency.value };
+}
+
+function mapDispatchToProps(dispatch) {
+	return {
+		changeCurrency: (currency) => dispatch(changeCurrency(currency)),
+	};
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(CurrencySwitcher);

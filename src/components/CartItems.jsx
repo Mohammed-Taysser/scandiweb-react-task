@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import CART from '../constants/cart';
+import { connect } from 'react-redux';
+import { exchangePrice } from '../utils/exchange';
 import {
 	CapacityAttribute,
 	ColorAttribute,
@@ -10,10 +11,6 @@ import Carousel from './Carousel';
 class CartItems extends Component {
 	state = {
 		quantity: {},
-	};
-	getPriceByCurrency = (price) => {
-		const selectedPrice = price.find((value) => value.currency.label === 'USD');
-		return selectedPrice.amount;
 	};
 
 	incrementQuantity = (id) => {
@@ -31,7 +28,7 @@ class CartItems extends Component {
 	render() {
 		return (
 			<div className='cart-items-wrapper'>
-				{CART.map((item) => (
+				{this.props.cart.map((item) => (
 					<div
 						className={`single-cart-item ${
 							this.props.withBorder ? 'with-border' : ''
@@ -42,9 +39,11 @@ class CartItems extends Component {
 							<h3 className='item-title'>{item.name}</h3>
 							<h5 className='item-brand'>{item.brand}</h5>
 							<p className='item-price'>
-								<span className='item-currency-symbol'>$</span>
+								<span className='item-currency-symbol'>
+									{this.props.currency.symbol}
+								</span>{' '}
 								<span className='item-currency-value'>
-									{this.getPriceByCurrency(item.prices)}
+									{exchangePrice(item.prices, this.props.currency)}
 								</span>
 							</p>
 							<SizeAttribute item={item} />
@@ -81,4 +80,8 @@ class CartItems extends Component {
 	}
 }
 
-export default CartItems;
+function mapStateToProps(state) {
+	return { currency: state.currency.value, cart: state.cart.items };
+}
+
+export default connect(mapStateToProps)(CartItems);

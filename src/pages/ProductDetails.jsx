@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import parse from 'html-react-parser';
-import withParams from '../utils/withParams';
+import { connect } from 'react-redux';
+import { exchangePrice } from '../utils/exchange';
+import withParams from '../provider/withParams';
 import PRODUCTS from '../constants/cart';
 import {
 	CapacityAttribute,
 	ColorAttribute,
 	SizeAttribute,
 } from '../utils/productAttribute';
-import productPrice from '../utils/productPrice';
 
 class ProductDetails extends Component {
 	state = {
@@ -56,11 +57,17 @@ class ProductDetails extends Component {
 							<SizeAttribute item={this.state.product} />
 							<ColorAttribute item={this.state.product} />
 							<CapacityAttribute item={this.state.product} />
+
 							<div className='item-price'>
 								<p className='item-attribute-label'>price:</p>
-								<span className='item-currency-symbol'>$</span>
+								<span className='item-currency-symbol'>
+									{this.props.currency.symbol}
+								</span>{' '}
 								<span className='item-currency-value'>
-									{productPrice(this.state.product.prices)}
+									{exchangePrice(
+										this.state.product.prices,
+										this.props.currency
+									)}
 								</span>
 							</div>
 							<button className='btn-aurora btn-cart'>ADD TO CART</button>
@@ -76,4 +83,9 @@ class ProductDetails extends Component {
 		);
 	}
 }
-export default withParams(ProductDetails);
+
+function mapStateToProps(state) {
+	return { currency: state.currency.value };
+}
+
+export default connect(mapStateToProps)(withParams(ProductDetails));

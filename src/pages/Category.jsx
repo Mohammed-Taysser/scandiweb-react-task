@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { exchangePrice } from '../utils/exchange';
 import cartIcon from '../assets/images/icons/cart-white.svg';
 import PRODUCT from '../constants/cart';
-import getProductPrice from '../utils/productPrice';
 
 class Category extends Component {
 	onAddToCartClick = (product) => {
@@ -37,7 +38,8 @@ class Category extends Component {
 								{product.name} {product.brand}
 							</Link>
 							<div className='product-price'>
-								$ {getProductPrice(product.prices)}
+								{this.props.currency.symbol}{' '}
+								{exchangePrice(product.prices, this.props.currency)}
 							</div>
 						</div>
 					</div>
@@ -60,4 +62,8 @@ class Category extends Component {
 	}
 }
 
-export default Category;
+function mapStateToProps(state) {
+	return { currency: state.currency.value };
+}
+
+export default connect(mapStateToProps)(Category);
