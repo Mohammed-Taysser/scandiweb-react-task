@@ -1,5 +1,8 @@
 {
 	"cSpell.words": [
 		"scandiweb"
+	],
+	"marquee.widgets.npm-stats.packageNames": [
+		"scandiweb-react-task"
 	]
 }
