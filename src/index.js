@@ -7,14 +7,12 @@ import { store } from './redux/store';
 import { Provider } from 'react-redux';
 import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-
 const client = new ApolloClient({
 	uri: process.env.REACT_APP_API_BASE_URL,
 	cache: new InMemoryCache(),
 });
 
-root.render(
+ReactDOM.createRoot(document.getElementById('root')).render(
 	<React.StrictMode>
 		<Provider store={store}>
 			<ApolloProvider client={client}>
