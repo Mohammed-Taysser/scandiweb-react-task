@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, createRef } from 'react';
 import CartItems from './CartItems';
 import cartIcon from '../assets/images/icons/cart.svg';
 import { connect } from 'react-redux';
@@ -8,25 +8,25 @@ import { cartItemsLength, cartTotalFees } from '../utils/cart';
 class MiniCart extends Component {
 	state = {
 		isOpen: this.props.isOpen || false,
+		dropdownWrapperRef: createRef(),
+		dropdownToggleRef: createRef(),
 	};
 
 	componentDidMount() {
 		// Assign click handler to listen the click to close the dropdown when clicked outside
-		document.addEventListener('click', this.OnClickOutside);
+		document.addEventListener('click', this.onClickOutside);
 	}
 
 	componentWillUnmount() {
 		// Remove the listener
-		document.removeEventListener('click', this.OnClickOutside);
+		document.removeEventListener('click', this.onClickOutside);
 	}
 
 	// If click is outside the dropdown button or display area Close the dropdown
-	OnClickOutside = (evt) => {
-		const path = evt.path || (evt.composedPath && evt.composedPath());
-
+	onClickOutside = (evt) => {
 		if (
-			!path.includes(this.displayAreaRef) &&
-			!path.includes(this.dropTogglerRef)
+			!this.state.dropdownWrapperRef.current.contains(evt.target) &&
+			!this.state.dropdownToggleRef.current.contains(evt.target)
 		) {
 			this.setState({
 				isOpen: false,
@@ -47,7 +47,7 @@ class MiniCart extends Component {
 				<div
 					className='min-cart-dropdown-toggle'
 					onClick={this.toggleDropDownVisibility}
-					ref={(ref) => (this.dropTogglerRef = ref)}
+					ref={this.state.dropdownToggleRef}
 				>
 					<img src={cartIcon} alt='cart icon' />
 					<span className='cart-counter'>
@@ -58,12 +58,12 @@ class MiniCart extends Component {
 					className={`mini-cart-dropdown-wrapper ${
 						this.state.isOpen ? 'open' : ''
 					}`}
-					ref={(ref) => (this.displayAreaRef = ref)}
+					ref={this.state.dropdownWrapperRef}
 				>
 					<div className='cart-hero-title'>
 						<strong>my bag</strong> {cartItemsLength(this.props.cart)} items
 					</div>
-					<CartItems />
+					<CartItems disabled cart={this.props.cart} />
 					<div className='total-title'>
 						<span>total</span>
 						<span>
