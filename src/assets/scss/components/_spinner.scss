@@ -15,10 +15,12 @@
 		position: absolute;
 		left: 0;
 		top: 0;
+		-webkit-animation: spinnerAnimation 2s linear infinite;
 		animation: spinnerAnimation 2s linear infinite;
 		opacity: 0;
 	}
 	&::after {
+		-webkit-animation-delay: 1s;
 		animation-delay: 1s;
 	}
 }

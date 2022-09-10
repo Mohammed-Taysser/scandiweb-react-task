@@ -1,5 +1,6 @@
 .navbar {
 	z-index: 3;
+	position: -webkit-sticky;
 	position: sticky;
 	top: 0;
 	background: #fff;

@@ -103,6 +103,9 @@ body {
 
 			&.out-stock {
 				opacity: 0.5;
+				-webkit-user-select: none;
+				-moz-user-select: none;
+				-ms-user-select: none;
 				user-select: none;
 
 				.product-image-wrapper::before {
@@ -244,6 +247,9 @@ body {
 			justify-content: center;
 			cursor: pointer;
 			transition: 0.5s;
+			-webkit-user-select: none;
+			-moz-user-select: none;
+			-ms-user-select: none;
 			user-select: none;
 			margin: 0 3px;
 

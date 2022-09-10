@@ -30,6 +30,21 @@
 	cursor: pointer;
 }
 
+a {
+	color: $main-color;
+	text-decoration: none;
+
+	&:hover {
+		color: rgba($color: $main-color, $alpha: 0.8);
+		text-decoration: underline;
+	}
+}
+
+::-moz-selection {
+	background-color: $main-color;
+	color: #fff;
+}
+
 ::selection {
 	background-color: $main-color;
 	color: #fff;
@@ -42,6 +57,9 @@ hr.special-hr {
 }
 
 .user-select-none {
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
 	user-select: none;
 }
 
@@ -79,6 +97,9 @@ hr.special-hr {
 	text-decoration: none;
 	vertical-align: middle;
 	cursor: pointer;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
 	user-select: none;
 	border: 1px solid transparent;
 	font-size: 1rem;
@@ -93,11 +114,13 @@ hr.special-hr {
 		color: #fff;
 		background-color: rgba($color: $main-color, $alpha: 0.9);
 		border-color: rgba($color: $main-color, $alpha: 0.9);
+		text-decoration: none;
 	}
 
 	&:focus {
 		background-color: rgba($color: $main-color, $alpha: 0.8);
 		border-color: rgba($color: $main-color, $alpha: 0.8);
 		color: #fff;
+		text-decoration: none;
 	}
 }
