@@ -1,14 +1,19 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { calculateCartLength } from '../../utils/cart';
+
+const STORED_CART = JSON.parse(localStorage.getItem('cart')) || [];
 
 export const cartSlice = createSlice({
 	name: 'cart',
 	initialState: {
-		items: JSON.parse(localStorage.getItem('cart')) || [],
+		items: STORED_CART,
+		length: calculateCartLength(STORED_CART),
 	},
 	reducers: {
 		addCartItem: (state, action) => {
 			state.items.push(action.payload);
 			localStorage.setItem('cart', JSON.stringify(state.items));
+			state.length = calculateCartLength(state.items);
 		},
 		updateCartItem: (state, action) => {
 			const updatedCartItems = state.items.map((item) => {
@@ -18,12 +23,14 @@ export const cartSlice = createSlice({
 				return item;
 			});
 			state.items = updatedCartItems;
+			state.length = calculateCartLength(updatedCartItems);
 			localStorage.setItem('cart', JSON.stringify(updatedCartItems));
 		},
 	},
 });
 
 // Action creators are generated for each case reducer function
-export const { addCartItem, updateCartItem } = cartSlice.actions;
+export const { addCartItem, updateCartItem } =
+	cartSlice.actions;
 
 export default cartSlice.reducer;
