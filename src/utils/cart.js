@@ -4,7 +4,7 @@ import { exchangePrice } from './exchange';
  * @param {Array} cart cart items
  * @returns {Number} items length
  */
-function cartItemsLength(cart = []) {
+function calculateCartLength(cart = []) {
 	return cart.reduce((prev, current) => prev + current.quantity, 0);
 }
 
@@ -24,4 +24,4 @@ function cartTotalFees(cart = [], currency = {}) {
 		.toFixed(2);
 }
 
-export { cartItemsLength, cartTotalFees };
+export { calculateCartLength, cartTotalFees };
