@@ -1,9 +1,10 @@
 import React, { Component, createRef } from 'react';
-import CartItems from './CartItems';
-import cartIcon from '../assets/images/icons/cart.svg';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { cartItemsLength, cartTotalFees } from '../utils/cart';
+import { cartTotalFees } from '../utils/cart';
+import CartList from './CartList';
+import Alert from './Alert';
+import cartIcon from '../assets/images/icons/cart.svg';
 
 class MiniCart extends Component {
 	state = {
@@ -50,9 +51,7 @@ class MiniCart extends Component {
 					ref={this.state.dropdownToggleRef}
 				>
 					<img src={cartIcon} alt='cart icon' />
-					<span className='cart-counter'>
-						{cartItemsLength(this.props.cart)}
-					</span>
+					<span className='cart-counter'>{this.props.cart.length}</span>
 				</div>
 				<div
 					className={`mini-cart-dropdown-wrapper ${
@@ -61,14 +60,18 @@ class MiniCart extends Component {
 					ref={this.state.dropdownWrapperRef}
 				>
 					<div className='cart-hero-title'>
-						<strong>my bag</strong> {cartItemsLength(this.props.cart)} items
+						<strong>my bag</strong> {this.props.cart.length} items
 					</div>
-					<CartItems disabled cart={this.props.cart} />
+					{this.props.cart.items.length > 0 ? (
+						<CartList cart={this.props.cart.items} />
+					) : (
+						<Alert>no cart items yet</Alert>
+					)}
 					<div className='total-title'>
 						<span>total</span>
 						<span>
 							{this.props.currency.symbol}{' '}
-							{cartTotalFees(this.props.cart, this.props.currency)}
+							{cartTotalFees(this.props.cart.items, this.props.currency)}
 						</span>
 					</div>
 					<div className='cart-navigation'>
@@ -84,7 +87,7 @@ class MiniCart extends Component {
 }
 
 function mapStateToProps(state) {
-	return { currency: state.currency.value, cart: state.cart.items };
+	return { currency: state.currency.value, cart: state.cart };
 }
 
 export default connect(mapStateToProps)(MiniCart);
