@@ -1,26 +1,74 @@
 import React, { Component } from 'react';
 import parse from 'html-react-parser';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { exchangePrice } from '../utils/exchange';
-import withParamsHOC from '../HOC/withParams';
-import {
-	CapacityAttribute,
-	ColorAttribute,
-	SizeAttribute,
-} from '../utils/productAttribute';
 import { productDetailsHOC } from '../HOC/apollo';
+import { addCartItem } from '../redux/features/cart.slice';
+import { isInCart } from '../utils/cart';
+import withParamsHOC from '../HOC/withParams';
 import Spinner from '../components/Spinner';
 import Alert from '../components/Alert';
+import ProductAttribute from '../components/ProductAttribute';
 
 class ProductDetails extends Component {
-	state = {
-		imagePreview: '',
-	};
+	constructor(props) {
+		super(props);
 
-	Render = () => {
+		this.state = {
+			imagePreview: '',
+			attributes: {},
+		};
+
+		this.onAddToCartClick = this.onAddToCartClick.bind(this);
+		this.AddToCartButton = this.AddToCartButton.bind(this);
+		this.RenderProductDetails = this.RenderProductDetails.bind(this);
+	}
+
+	onAddToCartClick(product) {
+		const item = {};
+		item['id'] = product.id;
+		item['name'] = product.name;
+		item['brand'] = product.brand;
+		item['attributes'] = this.state.attributes;
+		item['prices'] = product.prices;
+		item['gallery'] = product.gallery;
+		item['quantity'] = 1;
+		this.props.addCartItem(item);
+	}
+
+	AddToCartButton(props) {
+		const { product } = props;
+
+		if (!product.inStock) {
+			return <Alert>out of stock</Alert>;
+		}
+
+		if (isInCart(product.id, this.props.cart, this.state.attributes)) {
+			return (
+				<Alert>
+					item with these attributes already in cart{' '}
+					<Link to='/cart' className=''>
+						View Bag
+					</Link>
+				</Alert>
+			);
+		}
+
+		return (
+			<button
+				className='btn-aurora btn-cart'
+				onClick={() => this.onAddToCartClick(product)}
+			>
+				ADD TO CART
+			</button>
+		);
+	}
+
+	RenderProductDetails() {
 		const { loading, error, data } = this.props.query;
 		if (loading) {
-			return <Spinner />;
+			return <Spinner center />;
 		} else if (error) {
 			return <Alert>{error.message}</Alert>;
 		} else if (data?.product) {
@@ -51,9 +99,10 @@ class ProductDetails extends Component {
 						<h3 className='item-title'>{product.name}</h3>
 						<h5 className='item-brand'>{product.brand}</h5>
 
-						<SizeAttribute item={product} />
-						<ColorAttribute item={product} />
-						<CapacityAttribute item={product} />
+						<ProductAttribute
+							onChange={(attributes) => this.setState({ attributes })}
+							attributes={product.attributes}
+						/>
 
 						<div className='item-price'>
 							<p className='item-attribute-label'>price:</p>
@@ -64,7 +113,7 @@ class ProductDetails extends Component {
 								{exchangePrice(product.prices, this.props.currency)}
 							</span>
 						</div>
-						<button className='btn-aurora btn-cart'>ADD TO CART</button>
+						<this.AddToCartButton product={product} />
 						<div className='product-description'>
 							{parse(product.description)}
 						</div>
@@ -74,12 +123,12 @@ class ProductDetails extends Component {
 		} else {
 			return <Alert>no product found</Alert>;
 		}
-	};
+	}
 	render() {
 		return (
 			<div className='product-details-page'>
 				<div className='container'>
-					<this.Render />
+					<this.RenderProductDetails />
 				</div>
 			</div>
 		);
@@ -87,9 +136,16 @@ class ProductDetails extends Component {
 }
 
 function mapStateToProps(state) {
-	return { currency: state.currency.value };
+	return { currency: state.currency.value, cart: state.cart.items };
 }
 
-export default connect(mapStateToProps)(
-	withParamsHOC(productDetailsHOC(ProductDetails))
-);
+function mapDispatchToProps(dispatch) {
+	return {
+		addCartItem: (item) => dispatch(addCartItem(item)),
+	};
+}
+
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(withParamsHOC(productDetailsHOC(ProductDetails)));
