@@ -3,10 +3,20 @@ import arrowRight from '../assets/images/icons/arrow/arrow-right.svg';
 import arrowLeft from '../assets/images/icons/arrow/arrow-left.svg';
 
 class Carousel extends Component {
-	state = {
-		current: 1,
-	};
-	sliders = () => {
+	constructor(props) {
+		super(props);
+
+		this.state = {
+			current: 1,
+		};
+
+		this.sliders = this.sliders.bind(this);
+		this.controller = this.controller.bind(this);
+		this.nextSlide = this.nextSlide.bind(this);
+		this.prevSlide = this.prevSlide.bind(this);
+	}
+
+	sliders() {
 		return (
 			<>
 				{this.props.gallery.map((image, index) => (
@@ -21,8 +31,8 @@ class Carousel extends Component {
 				))}
 			</>
 		);
-	};
-	controller = () => {
+	}
+	controller() {
 		return this.props.gallery.length > 1 ? (
 			<div className='carousel-controller'>
 				<div className='arrow-left' onClick={this.prevSlide}>
@@ -35,23 +45,23 @@ class Carousel extends Component {
 		) : (
 			<></>
 		);
-	};
+	}
 
-	nextSlide = () => {
+	nextSlide() {
 		if (this.state.current !== this.props.gallery.length) {
 			this.setState((st) => ({ current: st.current + 1 }));
 		} else if (this.state.current === this.props.gallery.length) {
 			this.setState({ current: 1 });
 		}
-	};
+	}
 
-	prevSlide = () => {
+	prevSlide() {
 		if (this.state.current !== 1) {
 			this.setState((st) => ({ current: st.current - 1 }));
 		} else if (this.state.current === 1) {
 			this.setState({ current: this.props.gallery.length });
 		}
-	};
+	}
 
 	render() {
 		return (
@@ -59,7 +69,7 @@ class Carousel extends Component {
 				<div className='carousel-sliders'>
 					<this.sliders />
 				</div>
-				{this.props.withSlider&&<this.controller />}
+				{this.props.withSlider && <this.controller />}
 			</div>
 		);
 	}
