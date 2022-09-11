@@ -4,6 +4,11 @@
 	display: inline-block;
 	position: relative;
 
+	&.center {
+		display: block;
+		margin: auto;
+	}
+
 	&::after,
 	&::before {
 		content: '';
