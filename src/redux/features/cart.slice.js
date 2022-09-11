@@ -15,6 +15,11 @@ export const cartSlice = createSlice({
 			localStorage.setItem('cart', JSON.stringify(state.items));
 			state.length = calculateCartLength(state.items);
 		},
+		removeCartItem: (state, action) => {
+			state.items = state.items.filter((item) => item.id !== action.payload);
+			localStorage.setItem('cart', JSON.stringify(state.items));
+			state.length = calculateCartLength(state.items);
+		},
 		updateCartItem: (state, action) => {
 			const updatedCartItems = state.items.map((item) => {
 				if (item.id === action.payload.id) {
@@ -30,7 +35,7 @@ export const cartSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { addCartItem, updateCartItem } =
+export const { addCartItem, updateCartItem, removeCartItem } =
 	cartSlice.actions;
 
 export default cartSlice.reducer;
