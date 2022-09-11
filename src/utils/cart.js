@@ -1,4 +1,5 @@
 import { exchangePrice } from './exchange';
+import { refactorProductAttribute } from './products';
 /**
  * calculate cart items length
  * @param {Array} cart cart items
@@ -24,4 +25,32 @@ function cartTotalFees(cart = [], currency = {}) {
 		.toFixed(2);
 }
 
-export { calculateCartLength, cartTotalFees };
+/**
+ * detect if the given product with attributes is in cart or not
+ * @param {String} productId product id to be searched for
+ * @param {Array} cart cart items 
+ * @param {Array | Object} attributes product attributes to be searched
+ * @returns {Boolean} product in cart or not
+ */
+function isInCart(productId = '', cart = [], attributes = []) {
+	const refactoredAttribute = refactorProductAttribute(attributes);
+
+	/**
+	 * detect if the given product has the same selected attribute or not 
+	 * (selected attribute come from cart item)
+	 * @param {Object} product product
+	 * @returns {Boolean} has the same selected attribute or not
+	 */
+	const hasSameAttribute = (product) => {
+		return Object.keys(product.attributes).every(
+			(key) =>
+				product.attributes[key].selected === refactoredAttribute[key]?.selected
+		);
+	};
+
+	return cart.find(
+		(product) => product.id === productId && hasSameAttribute(product)
+	);
+}
+
+export { calculateCartLength, cartTotalFees, isInCart };
