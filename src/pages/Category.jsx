@@ -2,18 +2,46 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { exchangePrice } from '../utils/exchange';
-import cartIcon from '../assets/images/icons/cart-white.svg';
+import { addCartItem, removeCartItem } from '../redux/features/cart.slice';
 import { categoryProductHOC } from '../HOC/apollo';
+import { isInCart } from '../utils/cart';
 import withParamsHOC from '../HOC/withParams';
 import Spinner from '../components/Spinner';
 import Alert from '../components/Alert';
+import cartIcon from '../assets/images/icons/cart-white.svg';
 
 class Category extends Component {
-	onAddToCartClick = (product) => {
-		console.log(product);
-	};
+	constructor(props) {
+		super(props);
 
-	productList = () => {
+		this.AddToCartButton = this.AddToCartButton.bind(this);
+		this.ProductList = this.ProductList.bind(this);
+	}
+
+	AddToCartButton(props) {
+		const { product } = props;
+
+		const inCart = isInCart(
+			product.id,
+			this.props.cart.items,
+			product.attributes
+		);
+
+		return (
+			<button
+				className={`add-to-cart ${inCart ? 'added' : ''}`}
+				onClick={
+					inCart
+						? () => this.props.removeCartItem(product.id)
+						: () => this.props.addCartItem({ ...product, quantity: 1 })
+				}
+			>
+				<img src={cartIcon} alt='cart icon' />
+			</button>
+		);
+	}
+
+	ProductList() {
 		const { loading, error, data } = this.props.query;
 
 		if (loading) {
@@ -35,13 +63,8 @@ class Category extends Component {
 									className='product-image'
 									alt={product.name}
 								/>
-								{product.inStock && (
-									<button
-										className='add-to-cart'
-										onClick={() => this.onAddToCartClick(product)}
-									>
-										<img src={cartIcon} alt='cart icon' />
-									</button>
+								{product.inStock && product.attributes.length === 0 && (
+									<this.AddToCartButton product={product} />
 								)}
 							</div>
 							<div className='product-info-wrapper'>
@@ -60,17 +83,15 @@ class Category extends Component {
 		} else {
 			return <Alert>no category found</Alert>;
 		}
-	};
+	}
 
 	render() {
 		return (
 			<div className='category-page'>
 				<div className='container'>
-					<h1 className='display-5'>
-						category name: {this.props.params.title || 'all'}
-					</h1>
+					<h1 className='display-5'>{this.props.params.title || 'all'}</h1>
 					<div className='category-wrapper'>
-						<this.productList />
+						<this.ProductList />
 					</div>
 				</div>
 			</div>
@@ -79,9 +100,17 @@ class Category extends Component {
 }
 
 function mapStateToProps(state) {
-	return { currency: state.currency.value };
+	return { currency: state.currency.value, cart: state.cart };
 }
 
-export default connect(mapStateToProps)(
-	withParamsHOC(categoryProductHOC(Category))
-);
+function mapDispatchToProps(dispatch) {
+	return {
+		addCartItem: (item) => dispatch(addCartItem(item)),
+		removeCartItem: (item) => dispatch(removeCartItem(item)),
+	};
+}
+
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(withParamsHOC(categoryProductHOC(Category)));
