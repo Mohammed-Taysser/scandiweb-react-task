@@ -5,6 +5,7 @@ import { cartTotalFees } from '../utils/cart';
 import CartList from './CartList';
 import Alert from './Alert';
 import cartIcon from '../assets/images/icons/cart.svg';
+import { updateCartItem } from '../redux/features/cart.slice';
 
 class MiniCart extends Component {
 	state = {
@@ -63,7 +64,10 @@ class MiniCart extends Component {
 						<strong>my bag</strong> {this.props.cart.length} items
 					</div>
 					{this.props.cart.items.length > 0 ? (
-						<CartList cart={this.props.cart.items} />
+						<CartList
+							cart={this.props.cart.items}
+							onQuantityChange={(payload) => this.props.updateCartItem(payload)}
+						/>
 					) : (
 						<Alert>no cart items yet</Alert>
 					)}
@@ -90,4 +94,10 @@ function mapStateToProps(state) {
 	return { currency: state.currency.value, cart: state.cart };
 }
 
-export default connect(mapStateToProps)(MiniCart);
+function mapDispatchToProps(dispatch) {
+	return {
+		updateCartItem: (payload) => dispatch(updateCartItem(payload)),
+	};
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(MiniCart);
