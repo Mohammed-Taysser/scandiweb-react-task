@@ -30,7 +30,8 @@
 - [x] Filtering products by category name for all of the categories from BE
 - [x] The descriptions provided in HTML format should be parsed and presented as HTML, not as plain text
 - [x] Ability to change the currency of the store to one of the available currencies
-- [x] is [`withParams`](src/HOC/withParams.jsx) will accepted
+- [ ] is [`withParams`](src/HOC/withParams.jsx) will accepted
+- [x] ability to remove item from cart
 - [x] out of stock product in product details (add to cart still exist)
 
 ## Challenges 🎖️
@@ -41,6 +42,7 @@
 - [ ] Use Validation On Stored Data.
 - [ ] can't access other slices in the slice
 - [ ] handel extra render (because of redux-toolkit non interaction between separate slices)
+- [x] use `object` instead of `array` for **CURD** operation
 
 ## 12 Aug 2022
 
