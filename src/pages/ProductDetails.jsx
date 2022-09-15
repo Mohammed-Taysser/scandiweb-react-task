@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { exchangePrice } from '../utils/exchange';
 import { productDetailsHOC } from '../HOC/apollo';
 import { addCartItem } from '../redux/features/cart.slice';
-import { isInCart } from '../utils/cart';
+import { generateProductId } from '../utils/products';
 import withParamsHOC from '../HOC/withParams';
 import Spinner from '../components/Spinner';
 import Alert from '../components/Alert';
@@ -44,7 +44,12 @@ class ProductDetails extends Component {
 			return <Alert>out of stock</Alert>;
 		}
 
-		if (isInCart(product.id, this.props.cart, this.state.attributes)) {
+		const productId = generateProductId({
+			...product,
+			attributes: this.state.attributes,
+		});
+
+		if (this.props.cart[productId]) {
 			return (
 				<Alert>
 					item with these attributes already in cart{' '}
