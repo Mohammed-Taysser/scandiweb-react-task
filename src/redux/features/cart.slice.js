@@ -1,7 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { generateProductId } from '../../utils/products';
 import { calculateCartLength } from '../../utils/cart';
 
-const STORED_CART = JSON.parse(localStorage.getItem('cart')) || [];
+const STORED_CART = JSON.parse(localStorage.getItem('cart')) || {};
 
 export const cartSlice = createSlice({
 	name: 'cart',
@@ -11,25 +12,29 @@ export const cartSlice = createSlice({
 	},
 	reducers: {
 		addCartItem: (state, action) => {
-			state.items.push(action.payload);
-			localStorage.setItem('cart', JSON.stringify(state.items));
-			state.length = calculateCartLength(state.items);
+			const productId = generateProductId(action.payload);
+			if (!state.items[productId]) {
+				state.items[productId] = { ...action.payload, productId };
+				state.length = calculateCartLength(state.items);
+				localStorage.setItem('cart', JSON.stringify(state.items));
+			}
 		},
 		removeCartItem: (state, action) => {
-			state.items = state.items.filter((item) => item.id !== action.payload);
-			localStorage.setItem('cart', JSON.stringify(state.items));
-			state.length = calculateCartLength(state.items);
+			if (state.items[action.payload]) {
+				delete state.items[action.payload];
+				localStorage.setItem('cart', JSON.stringify(state.items));
+				state.length = calculateCartLength(state.items);
+			}
 		},
 		updateCartItem: (state, action) => {
-			const updatedCartItems = state.items.map((item) => {
-				if (item.id === action.payload.id) {
-					return { ...item, ...action.payload.item };
-				}
-				return item;
-			});
-			state.items = updatedCartItems;
-			state.length = calculateCartLength(updatedCartItems);
-			localStorage.setItem('cart', JSON.stringify(updatedCartItems));
+			if (state.items[action.payload.productId]) {
+				state.items[action.payload.productId] = {
+					...state.items[action.payload.productId],
+					...action.payload.product,
+				};
+			}
+			state.length = calculateCartLength(state.items);
+			localStorage.setItem('cart', JSON.stringify(state.items));
 		},
 	},
 });
