@@ -63,7 +63,7 @@ class MiniCart extends Component {
 					<div className='cart-hero-title'>
 						<strong>my bag</strong> {this.props.cart.length} items
 					</div>
-					{this.props.cart.items.length > 0 ? (
+					{Object.keys(this.props.cart.items).length? (
 						<CartList
 							cart={this.props.cart.items}
 							onQuantityChange={(payload) => this.props.updateCartItem(payload)}

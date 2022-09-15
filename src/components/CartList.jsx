@@ -22,8 +22,8 @@ class CartList extends Component {
 					className='item-quantity-plus'
 					onClick={() =>
 						this.props.onQuantityChange({
-							id: productId,
-							item: { quantity: quantity + 1 },
+							productId,
+							product: { quantity: quantity + 1 },
 						})
 					}
 				>
@@ -34,8 +34,8 @@ class CartList extends Component {
 					className='item-quantity-minus'
 					onClick={() =>
 						this.props.onQuantityChange({
-							id: productId,
-							item: {
+							productId,
+							product: {
 								quantity: quantity > 1 ? quantity - 1 : 1,
 							},
 						})
@@ -48,9 +48,10 @@ class CartList extends Component {
 	}
 
 	render() {
+		const { cart: cartItems } = this.props;
 		return (
 			<div className='cart-items-wrapper'>
-				{this.props.cart.map((product, index) => (
+				{Object.keys(this.props.cart).map((key, index) => (
 					<div
 						className={`single-cart-item ${
 							this.props.withBorder ? 'with-border' : ''
@@ -58,23 +59,25 @@ class CartList extends Component {
 						key={index}
 					>
 						<div className='item-info'>
-							<Link to={`/product/${product.id}`} className='item-title'>
-								{product.name}
+							<Link to={`/product/${cartItems[key].id}`} className='item-title'>
+								{cartItems[key].name}
 							</Link>
-							<h5 className='item-brand'>{product.brand}</h5>
+							<h5 className='item-brand'>{cartItems[key].brand}</h5>
 							<p className='item-price'>
 								<span className='item-currency-symbol'>
 									{this.props.currency.symbol}
 								</span>{' '}
 								<span className='item-currency-value'>
-									{exchangePrice(product.prices, this.props.currency)}
+									{exchangePrice(cartItems[key].prices, this.props.currency)}
 								</span>
 							</p>
-							<ProductAttributes attributes={product.attributes} />
+							<ProductAttributes attributes={cartItems[key].attributes} />
 							{this.props.removable && (
 								<button
 									className='btn-aurora btn-remove-from-cart'
-									onClick={() => this.props.removeCartItem(product.id)}
+									onClick={() =>
+										this.props.removeCartItem(cartItems[key].productId)
+									}
 								>
 									Remove From Cart
 								</button>
@@ -82,11 +85,11 @@ class CartList extends Component {
 						</div>
 						<div className='item-gallery'>
 							<this.Quantity
-								quantity={product.quantity}
-								productId={product.id}
+								quantity={cartItems[key].quantity}
+								productId={cartItems[key].productId}
 							/>
 							<Carousel
-								gallery={product.gallery}
+								gallery={cartItems[key].gallery}
 								withSlider={this.props.withSlider}
 							/>
 						</div>
@@ -102,7 +105,7 @@ CartList.defaultProps = {
 	withSlider: false,
 	withBorder: false,
 	removable: false,
-	cart: [],
+	cart: {},
 };
 
 function mapStateToProps(state) {
