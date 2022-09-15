@@ -12,16 +12,14 @@ class Cart extends Component {
 			<div>
 				<div className='container'>
 					<h1 className='display-5'>CART</h1>
-					{this.props.cart.items.length > 0 ? (
+					{Object.keys(this.props.cart.items).length ? (
 						<>
 							<CartList
 								withBorder
-								withSlider 
+								withSlider
 								removable
 								cart={this.props.cart.items}
-								onQuantityChange={(payload) =>
-									this.props.updateCartItem(payload)
-								}
+								onQuantityChange={this.props.updateCartItem}
 							/>
 							<div className='cart-info'>
 								<div className='cart-title'>
