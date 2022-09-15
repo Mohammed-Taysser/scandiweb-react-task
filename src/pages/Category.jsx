@@ -4,11 +4,11 @@ import { connect } from 'react-redux';
 import { exchangePrice } from '../utils/exchange';
 import { addCartItem, removeCartItem } from '../redux/features/cart.slice';
 import { categoryProductHOC } from '../HOC/apollo';
-import { isInCart } from '../utils/cart';
 import withParamsHOC from '../HOC/withParams';
 import Spinner from '../components/Spinner';
 import Alert from '../components/Alert';
 import cartIcon from '../assets/images/icons/cart-white.svg';
+import { generateProductId, refactorProductAttribute } from '../utils/products';
 
 class Category extends Component {
 	constructor(props) {
@@ -21,18 +21,19 @@ class Category extends Component {
 	AddToCartButton(props) {
 		const { product } = props;
 
-		const inCart = isInCart(
-			product.id,
-			this.props.cart.items,
-			product.attributes
-		);
+		const productId = generateProductId({
+			...product,
+			attributes: refactorProductAttribute(product.attributes),
+		});
 
 		return (
 			<button
-				className={`add-to-cart ${inCart ? 'added' : ''}`}
+				className={`add-to-cart ${
+					this.props.cart.items[productId] ? 'added' : ''
+				}`}
 				onClick={
-					inCart
-						? () => this.props.removeCartItem(product.id)
+					this.props.cart.items[productId]
+						? () => this.props.removeCartItem(productId)
 						: () => this.props.addCartItem({ ...product, quantity: 1 })
 				}
 			>
