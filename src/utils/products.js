@@ -2,6 +2,19 @@ import ATTRIBUTES from '../constants/attributes';
 import getTypeOf from './getTypeOf';
 
 /**
+ * generate product id depend on id, attributes
+ * @param {Object} product
+ * @returns {String} id
+ */
+function generateProductId(product = {}) {
+	return Object.keys(product.attributes).reduce(
+		(prev, current) =>
+			[prev, current, product.attributes[current].selected].join('-'),
+		product.id
+	);
+}
+
+/**
  *
  * 1. detect product attributes and turn them as object with it's id as key
  * 2. append default(selected attribute) value as first attribute item
@@ -33,4 +46,4 @@ function refactorProductAttribute(productAttribute) {
 	return refactoredAttribute;
 }
 
-export { refactorProductAttribute };
+export { refactorProductAttribute, generateProductId };
