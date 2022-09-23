@@ -2,7 +2,9 @@ import { createSlice } from '@reduxjs/toolkit';
 import { generateProductId } from '../../utils/products';
 import { calculateCartLength } from '../../utils/cart';
 
-const STORED_CART = JSON.parse(localStorage.getItem('cart')) || {};
+const CART_LOCAL_STORAGE = process.env.REACT_APP_LOCAL_STORAGE_CART_TITLE;
+
+const STORED_CART = JSON.parse(localStorage.getItem(CART_LOCAL_STORAGE)) || {};
 
 export const cartSlice = createSlice({
 	name: 'cart',
@@ -16,13 +18,13 @@ export const cartSlice = createSlice({
 			if (!state.items[productId]) {
 				state.items[productId] = { ...action.payload, productId };
 				state.length = calculateCartLength(state.items);
-				localStorage.setItem('cart', JSON.stringify(state.items));
+				localStorage.setItem(CART_LOCAL_STORAGE, JSON.stringify(state.items));
 			}
 		},
 		removeCartItem: (state, action) => {
 			if (state.items[action.payload]) {
 				delete state.items[action.payload];
-				localStorage.setItem('cart', JSON.stringify(state.items));
+				localStorage.setItem(CART_LOCAL_STORAGE, JSON.stringify(state.items));
 				state.length = calculateCartLength(state.items);
 			}
 		},
@@ -34,7 +36,7 @@ export const cartSlice = createSlice({
 				};
 			}
 			state.length = calculateCartLength(state.items);
-			localStorage.setItem('cart', JSON.stringify(state.items));
+			localStorage.setItem(CART_LOCAL_STORAGE, JSON.stringify(state.items));
 		},
 	},
 });
