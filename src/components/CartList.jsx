@@ -51,12 +51,12 @@ class CartList extends Component {
 		const { cart: cartItems } = this.props;
 		return (
 			<div className='cart-items-wrapper'>
-				{Object.keys(this.props.cart).map((key, index) => (
+				{Object.keys(this.props.cart).map((key) => (
 					<div
 						className={`single-cart-item ${
 							this.props.withBorder ? 'with-border' : ''
 						}`}
-						key={index}
+						key={key}
 					>
 						<div className='item-info'>
 							<Link to={`/product/${cartItems[key].id}`} className='item-title'>
