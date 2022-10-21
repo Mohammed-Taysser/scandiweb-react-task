@@ -15,6 +15,11 @@
 		padding-bottom: 0.5rem;
 	}
 
+	.navbar-brand {
+		position: absolute;
+		left: 50%;
+	}
+
 	.navbar-menu {
 		display: flex;
 		list-style: none;
