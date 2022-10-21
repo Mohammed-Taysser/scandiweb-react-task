@@ -6,6 +6,7 @@ import CartList from './CartList';
 import Alert from './Alert';
 import cartIcon from '../assets/images/icons/cart.svg';
 import { updateCartItem } from '../redux/features/cart.slice';
+import withNavigateHOC from '../HOC/withNavigation';
 
 class MiniCart extends Component {
 	state = {
@@ -43,6 +44,11 @@ class MiniCart extends Component {
 		document.body.classList.toggle('opened-mini-cart');
 	};
 
+	onViewBagClick = () => {
+		this.toggleDropDownVisibility();
+		this.props.navigateTo('/cart');
+	};
+
 	render() {
 		return (
 			<div className='mini-cart-dropdown'>
@@ -63,7 +69,7 @@ class MiniCart extends Component {
 					<div className='cart-hero-title'>
 						<strong>my bag</strong> {this.props.cart.length} items
 					</div>
-					{Object.keys(this.props.cart.items).length? (
+					{Object.keys(this.props.cart.items).length ? (
 						<CartList
 							cart={this.props.cart.items}
 							onQuantityChange={(payload) => this.props.updateCartItem(payload)}
@@ -79,9 +85,12 @@ class MiniCart extends Component {
 						</span>
 					</div>
 					<div className='cart-navigation'>
-						<Link to='/cart' className='btn-aurora btn-bag'>
+						<button
+							className='btn-aurora btn-bag'
+							onClick={this.onViewBagClick}
+						>
 							VIEW BAG
-						</Link>
+						</button>
 						<button className='btn-aurora btn-checkout'>CHECKOUT</button>
 					</div>
 				</div>
@@ -100,4 +109,7 @@ function mapDispatchToProps(dispatch) {
 	};
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(MiniCart);
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(withNavigateHOC(MiniCart));
