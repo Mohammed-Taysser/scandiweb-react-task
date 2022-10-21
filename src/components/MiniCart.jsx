@@ -1,6 +1,5 @@
 import React, { Component, createRef } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import { cartTotalFees } from '../utils/cart';
 import CartList from './CartList';
 import Alert from './Alert';
