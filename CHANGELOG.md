@@ -1,6 +1,23 @@
 
 # Changelog 📔
 
+## Submission feedback
+
+### Category Page
+
+- [ ]Green Cart button is missing (clicking on it should add product to cart with first predefined attribute values)
+- [ ]New row should start from left side instead of center
+- [ ]Fix navigation underline styling issue (2 underlines)
+- [ ]Fix Category name font size
+- [ ]Center Green Cart icon in header
+- [ ]make whole product card clickable instead of only name
+- [ ]Attributes should not be selected by default when going to product page
+- [ ]Should be able to add multiple products to cart (now it only allows one from one type)
+- [ ]Center out of stock on product cards
+- [ ]Cart overlay should be closed when view cart is clicked
+- [ ]remove buttons are not needed
+- [ ]Fix swatch styling in the cart (especially when value name is too long. Fix padding)
+
 ## Todo's 💪
 
 - [x] how to add multi items with different attribute from PDP
@@ -19,7 +36,7 @@
 - [x] Currency Switcher icon should change on currency select.
 - [x] Currency Switcher items should be highlighted.
 - [x] Currency Switcher should close on currency select.
-- [x] Add a product to the cart from PLP only if it doesn’t have any attributes (like AirTag).
+- [x] Add a product to the cart from PLP only if it doesn't have any attributes (like AirTag).
 - [x] Add a product to the cart with first selected attributes as defaults.
 - [x] Product with same attributes should stack in the cart, while a product with different attributes should appear as separate cart items.
 - [x] Product brand and product name are joined together and rendered on the same line.
