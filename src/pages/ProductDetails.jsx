@@ -10,6 +10,7 @@ import withParamsHOC from '../HOC/withParams';
 import Spinner from '../components/Spinner';
 import Alert from '../components/Alert';
 import ProductAttribute from '../components/ProductAttribute';
+import ATTRIBUTES from '../constants/attributes';
 
 class ProductDetails extends Component {
 	constructor(props) {
@@ -49,6 +50,14 @@ class ProductDetails extends Component {
 			attributes: this.state.attributes,
 		});
 
+		const isAllAttributesChoose = Object.keys(this.state.attributes).every(
+			(key) => this.state.attributes[key].selected
+		);
+
+		if (!isAllAttributesChoose) {
+			return <Alert>please make sure to select one of all attributes</Alert>;
+		}
+
 		if (this.props.cart[productId]) {
 			return (
 				<Alert>
@@ -78,6 +87,21 @@ class ProductDetails extends Component {
 			return <Alert>{error.message}</Alert>;
 		} else if (data?.product) {
 			const { product } = data;
+
+			let productAttributes = {};
+
+			ATTRIBUTES.forEach((attribute) => {
+				const currentAttribute = product.attributes.find(
+					(attr) => attr.id === attribute
+				);
+
+				if (currentAttribute) {
+					productAttributes[currentAttribute.id] = {
+						...currentAttribute,
+					};
+				}
+			});
+
 			return (
 				<div className='product-details'>
 					<div className='product-image'>
@@ -106,7 +130,7 @@ class ProductDetails extends Component {
 
 						<ProductAttribute
 							onChange={(attributes) => this.setState({ attributes })}
-							attributes={product.attributes}
+							attributes={productAttributes}
 						/>
 
 						<div className='item-price'>
