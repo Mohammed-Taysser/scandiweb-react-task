@@ -16,14 +16,31 @@ class Category extends Component {
 
 		this.AddToCartButton = this.AddToCartButton.bind(this);
 		this.ProductList = this.ProductList.bind(this);
+		this.onAddToCartClick = this.onAddToCartClick.bind(this);
+	}
+
+	onAddToCartClick(product) {
+		const item = {};
+
+		item['id'] = product.id;
+		item['productId'] = product.productId;
+		item['name'] = product.name;
+		item['brand'] = product.brand;
+		item['attributes'] = product.attributes;
+		item['prices'] = product.prices;
+		item['gallery'] = product.gallery;
+		item['quantity'] = 1;
+		this.props.addCartItem(item);
 	}
 
 	AddToCartButton(props) {
 		const { product } = props;
 
+		const refactoredAttributes = refactorProductAttribute(product.attributes);
+
 		const productId = generateProductId({
 			...product,
-			attributes: refactorProductAttribute(product.attributes),
+			attributes: refactoredAttributes,
 		});
 
 		return (
@@ -34,7 +51,12 @@ class Category extends Component {
 				onClick={
 					this.props.cart.items[productId]
 						? () => this.props.removeCartItem(productId)
-						: () => this.props.addCartItem({ ...product, quantity: 1 })
+						: () =>
+								this.onAddToCartClick({
+									...product,
+									productId,
+									attributes: refactoredAttributes,
+								})
 				}
 			>
 				<img src={cartIcon} alt='cart icon' />
@@ -64,9 +86,7 @@ class Category extends Component {
 									className='product-image'
 									alt={product.name}
 								/>
-								{product.inStock && product.attributes.length === 0 && (
-									<this.AddToCartButton product={product} />
-								)}
+								{product.inStock && <this.AddToCartButton product={product} />}
 							</div>
 							<div className='product-info-wrapper'>
 								<Link to={`/product/${product.id}`} className='product-title'>
