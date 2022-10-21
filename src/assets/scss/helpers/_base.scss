@@ -107,14 +107,16 @@ body {
 				-moz-user-select: none;
 				-ms-user-select: none;
 				user-select: none;
+				z-index: 1;
 
-				.product-image-wrapper::before {
+				&:before {
 					content: 'out of stock';
 					position: absolute;
-					top: 170px;
+					top: 50%;
 					transform: translate(50%);
 					font-size: 1.2rem;
 					text-transform: uppercase;
+					z-index: 2;
 				}
 			}
 
