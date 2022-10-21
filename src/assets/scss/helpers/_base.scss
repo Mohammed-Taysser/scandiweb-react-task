@@ -84,6 +84,7 @@ body {
 			transition: 0.5s;
 			padding: 10px;
 			margin: 15px 10px;
+			position: relative;
 
 			@media (max-width: 768px) {
 				width: calc(100% / 2 - 30px);
@@ -142,6 +143,7 @@ body {
 					right: 20px;
 					opacity: 0;
 					transition: 0.5s;
+					z-index: 2;
 
 					&.added {
 						background-color: tomato;
@@ -157,9 +159,21 @@ body {
 					font-weight: 300;
 					color: #1d1f22;
 				}
+
 				.product-title {
 					text-decoration: none;
+
+					&:after {
+						position: absolute;
+						top: 0;
+						right: 0;
+						bottom: 0;
+						left: 0;
+						z-index: 1;
+						content: '';
+					}
 				}
+
 				.product-price {
 					margin-top: 10px;
 					font-weight: 500;
