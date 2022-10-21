@@ -43,20 +43,19 @@ class Category extends Component {
 			attributes: refactoredAttributes,
 		});
 
+		if (this.props.cart.items[productId]) {
+			return <></>;
+		}
+
 		return (
 			<button
-				className={`add-to-cart ${
-					this.props.cart.items[productId] ? 'added' : ''
-				}`}
-				onClick={
-					this.props.cart.items[productId]
-						? () => this.props.removeCartItem(productId)
-						: () =>
-								this.onAddToCartClick({
-									...product,
-									productId,
-									attributes: refactoredAttributes,
-								})
+				className={`add-to-cart`}
+				onClick={() =>
+					this.onAddToCartClick({
+						...product,
+						productId,
+						attributes: refactoredAttributes,
+					})
 				}
 			>
 				<img src={cartIcon} alt='cart icon' />
