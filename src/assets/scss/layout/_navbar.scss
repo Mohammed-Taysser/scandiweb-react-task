@@ -36,10 +36,13 @@
 			text-transform: uppercase;
 			font-size: 16px;
 
-			&.active,
-			&:hover {
+			&.active {
 				color: $main-color;
 				border-bottom-color: $main-color;
+			}
+
+			&:hover {
+				color: $main-color;
 			}
 		}
 	}
