@@ -3,20 +3,18 @@
 
 ## Submission feedback
 
-### Category Page
-
-- [ ]Green Cart button is missing (clicking on it should add product to cart with first predefined attribute values)
-- [ ]New row should start from left side instead of center
-- [ ]Fix navigation underline styling issue (2 underlines)
-- [ ]Fix Category name font size
-- [ ]Center Green Cart icon in header
-- [ ]make whole product card clickable instead of only name
-- [ ]Attributes should not be selected by default when going to product page
-- [ ]Should be able to add multiple products to cart (now it only allows one from one type)
-- [ ]Center out of stock on product cards
-- [ ]Cart overlay should be closed when view cart is clicked
-- [ ]remove buttons are not needed
-- [ ]Fix swatch styling in the cart (especially when value name is too long. Fix padding)
+- [x] Green Cart button is missing (clicking on it should add product to cart with first predefined attribute values)
+- [x] New row should start from left side instead of center
+- [x] Fix navigation underline styling issue (2 underlines)
+- [x] Fix Category name font size
+- [x] Center Green Cart icon in header
+- [x] make whole product card clickable instead of only name
+- [x] Attributes should not be selected by default when going to product page
+- [x] Should be able to add multiple products to cart (now it only allows one from one type)
+- [x] Center out of stock on product cards
+- [x] Cart overlay should be closed when view cart is clicked
+- [x] remove buttons are not needed
+- [x] Fix swatch styling in the cart (especially when value name is too long. Fix padding)
 
 ## Todo's 💪
 
@@ -47,7 +45,7 @@
 - [x] Filtering products by category name for all of the categories from BE
 - [x] The descriptions provided in HTML format should be parsed and presented as HTML, not as plain text
 - [x] Ability to change the currency of the store to one of the available currencies
-- [ ] is [`withParams`](src/HOC/withParams.jsx) will accepted
+- [x] is [`withParams`](src/HOC/withParams.jsx) and similar will accepted ??
 - [x] ability to remove item from cart
 - [x] out of stock product in product details (add to cart still exist)
 
@@ -60,6 +58,8 @@
 - [ ] can't access other slices in the slice
 - [ ] handel extra render (because of redux-toolkit non interaction between separate slices)
 - [x] use `object` instead of `array` for **CURD** operation
+- [ ] Write tests 🤖
+- [ ] make possibles data dynamically call, like categories, currency
 
 ## 12 Aug 2022
 
