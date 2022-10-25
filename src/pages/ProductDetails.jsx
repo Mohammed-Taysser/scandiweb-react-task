@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { exchangePrice } from '../utils/exchange';
 import { productDetailsHOC } from '../HOC/apollo';
-import { addCartItem } from '../redux/features/cart.slice';
+import { addCartItem, updateCartItem } from '../redux/features/cart.slice';
 import { generateProductId } from '../utils/products';
 import withParamsHOC from '../HOC/withParams';
 import Spinner from '../components/Spinner';
@@ -58,14 +58,22 @@ class ProductDetails extends Component {
 			return <Alert>please make sure to select one of all attributes</Alert>;
 		}
 
-		if (this.props.cart[productId]) {
+		const productWithChosenAttributes = this.props.cart[productId];
+		if (productWithChosenAttributes) {
 			return (
-				<Alert>
-					item with these attributes already in cart{' '}
-					<Link to='/cart' className=''>
-						View Bag
-					</Link>
-				</Alert>
+				<button
+					className='btn-aurora btn-cart'
+					onClick={() =>
+						this.props.updateCartItem({
+							productId,
+							product: {
+								quantity: productWithChosenAttributes.quantity + 1,
+							},
+						})
+					}
+				>
+					ADD TO CART
+				</button>
 			);
 		}
 
@@ -171,6 +179,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
 	return {
 		addCartItem: (item) => dispatch(addCartItem(item)),
+		updateCartItem: (payload) => dispatch(updateCartItem(payload)),
 	};
 }
 
