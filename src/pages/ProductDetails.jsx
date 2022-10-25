@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import parse from 'html-react-parser';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import { exchangePrice } from '../utils/exchange';
 import { productDetailsHOC } from '../HOC/apollo';
 import { addCartItem, updateCartItem } from '../redux/features/cart.slice';
